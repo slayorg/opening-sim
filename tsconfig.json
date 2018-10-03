@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"moduleResolution": "node",
+		"allowJs": true,
+		"jsx": "react",
+		"jsxFactory": "h",
+		"experimentalDecorators": true,
+		"noImplicitAny": true,
+		"noEmit": true
+	},
+	"include": [
+		"src"
+	]
+}
