@@ -1,0 +1,9 @@
+.skill-list{
+	width: 300px;
+	> div {
+		display: flex;
+		> div{
+			flex: 1;
+		}
+	}
+}
