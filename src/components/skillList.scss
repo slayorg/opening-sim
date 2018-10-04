@@ -1,5 +1,8 @@
 .skill-list{
-	width: 300px;
+	flex: 1;
+	margin: 3px;
+	padding: 5px;
+	border: 1px solid black;
 	> div {
 		display: flex;
 		> div{

@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import sass from 'rollup-plugin-sass';
+import json from 'rollup-plugin-json';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 
@@ -20,6 +21,9 @@ export default {
 		}),
 		sass({
 			output: './dist/bundle.css'
+		}),
+		json({
+			compact: true
 		}),
 		serve({
 			open: true,

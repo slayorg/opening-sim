@@ -1,0 +1,44 @@
+{
+	"job":{
+		 "id":"job",
+		 "name":"Job",
+		 "type":"job",
+		 "value":0
+	},
+	"aaDelay":{
+		 "id":"aaDelay",
+		 "name":"AA-Delay",
+		 "type":"time",
+		 "value":3
+	},
+	"critical":{
+		 "id":"critical",
+		 "name":"Critical",
+		 "type":"number",
+		 "value":364
+	},
+	"speed":{
+		 "id":"speed",
+		 "name":"Speed",
+		 "type":"number",
+		 "value":364
+	},
+	"wsStiff":{
+		 "id":"wsStiff",
+		 "name":"WS stiff",
+		 "type":"time",
+		 "value":0.85
+	},
+	"abilityStiff":{
+		 "id":"abilityStiff",
+		 "name":"Ability stiff",
+		 "type":"time",
+		 "value":0.85
+	},
+	"autoattack":{
+		 "id":"autoattack",
+		 "name":"Autoattack",
+		 "type":"boolean",
+		 "value":true
+	}
+}

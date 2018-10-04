@@ -1,10 +1,13 @@
 import './index.scss';
 import { render, h, Component } from 'preact';
 
-import Counter from './counter';
 import SkillList from './components/skillList';
+import ParamsPanel from './components/paramsPanel';
+import SkillPanel from './components/skillPanel';
 
-import {ISkill} from './models';
+import {ISkill, IJobProperties, IPropertyItem} from './models';
+
+import parameters from './data/parameters.json';
 
 let skills: Array<ISkill> = [
 	{
@@ -19,20 +22,32 @@ let skills: Array<ISkill> = [
 		name: 'skill 3',
 		value: 1.5
 	}
-]
+];
 
-class App extends Component<{}, {}> {
+interface IAppState {
+	parameters: IJobProperties;
+}
 
-	buttonClicked = (value: number): void => {
-		console.log('the button was clicked ' + value + ' times');
+class App extends Component<{}, IAppState> {
+
+	state: IAppState = {
+		parameters: parameters as IJobProperties
+	}
+
+	updateParameter = (id: string, value: number | boolean): void => {
+		let parameters = this.state.parameters;
+		parameters[id].value = value;
+		this.setState({parameters});
 	}
 
 	render(){
 		return (
 			<div>
-				<div className="super-title">App!</div>
-				<Counter clicked={this.buttonClicked}/>
-				<SkillList skills={skills} />
+				<ParamsPanel parameters={this.state.parameters} update={this.updateParameter}/>
+				<div className="right-panel">
+					<SkillPanel />
+					<SkillList skills={skills} />
+				</div>	
 			</div>
 		)
 	}
