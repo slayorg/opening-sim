@@ -1,44 +1,54 @@
 {
-	"job":{
-		 "id":"job",
-		 "name":"Job",
-		 "type":"job",
-		 "value":0
+	"damage": {
+		"name": "Weapon Damage",
+		"type": "number"
 	},
-	"aaDelay":{
-		 "id":"aaDelay",
-		 "name":"AA-Delay",
-		 "type":"time",
-		 "value":3
+	"delay": {
+		"name": "Weapon Delay",
+		"type": "time"
 	},
-	"critical":{
-		 "id":"critical",
-		 "name":"Critical",
-		 "type":"number",
-		 "value":364
+	"str":{
+		"name": "Strength",
+		"type": "number"
 	},
-	"speed":{
-		 "id":"speed",
-		 "name":"Speed",
-		 "type":"number",
-		 "value":364
+	"dex":{
+		"name": "Dexterity",
+		"type": "number"
 	},
-	"wsStiff":{
-		 "id":"wsStiff",
-		 "name":"WS stiff",
-		 "type":"time",
-		 "value":0.85
+	"vit":{
+		"name": "Vitality",
+		"type": "number"
 	},
-	"abilityStiff":{
-		 "id":"abilityStiff",
-		 "name":"Ability stiff",
-		 "type":"time",
-		 "value":0.85
+	"int":{
+		"name": "Intelligence",
+		"type": "number"
+	},
+	"mind":{
+		"name": "Mind",
+		"type": "number"
+	},
+	"crit":{
+		"name": "Critical Rate",
+		"type": "number"
+	},
+	"determination":{
+		"name": "Determination",
+		"type": "number"
+	},
+	"direct":{
+		"name": "Direct Hit Rate",
+		"type": "number"
 	},
 	"autoattack":{
-		 "id":"autoattack",
-		 "name":"Autoattack",
-		 "type":"boolean",
-		 "value":true
+		"name": "Autoattack",
+		"type": "boolean"
+	},
+	"skillspeed":{
+		"name": "Skill Speed",
+		"type": "number"
+	},
+	"spellspeed":{
+		"name": "Spell Speed",
+		"type": "number"
 	}
 }

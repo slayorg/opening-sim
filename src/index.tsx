@@ -5,45 +5,49 @@ import SkillList from './components/skillList';
 import ParamsPanel from './components/paramsPanel';
 import SkillPanel from './components/skillPanel';
 
-import {ISkill, IJobProperties, IPropertyItem} from './models';
+import {ISkill, IJobProperties} from './models';
 
-import parameters from './data/parameters.json';
 
 let skills: Array<ISkill> = [
-	{
-		name: 'Skill 1',
-		value: 1
-	},
-	{
-		name: 'skill 2',
-		value: 2
-	},
-	{
-		name: 'skill 3',
-		value: 1.5
-	}
 ];
 
 interface IAppState {
-	parameters: IJobProperties;
+	params: {[key: string]: number | boolean};
 }
 
 class App extends Component<{}, IAppState> {
 
 	state: IAppState = {
-		parameters: parameters as IJobProperties
+		params: {
+			damage: 104,
+			delay: 2.56,
+			str: 2919,
+			dex: 307,
+			vit: 2279,
+			int: 148,
+			mind: 265,
+			crit: 1155,
+			determination: 1394,
+			direct: 1329,
+			skillspeed: 1660,
+			spellspeed: 364,
+			autoattack: true
+		}
 	}
 
 	updateParameter = (id: string, value: number | boolean): void => {
-		let parameters = this.state.parameters;
-		parameters[id].value = value;
-		this.setState({parameters});
+		let parameters = this.state.params;
+		parameters[id] = value;
+		this.setState({params: parameters});
 	}
 
 	render(){
 		return (
 			<div>
-				<ParamsPanel parameters={this.state.parameters} update={this.updateParameter}/>
+				<ParamsPanel
+					value={this.state.params}
+					update={this.updateParameter}
+				/>
 				<div className="right-panel">
 					<SkillPanel />
 					<SkillList skills={skills} />

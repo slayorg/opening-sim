@@ -9,18 +9,11 @@ export interface ISkill {
 
 export interface IJobProperties{
 	[key: string]: IPropertyItem;
-	job?: IPropertyItem;
-	aaDelay?: IPropertyItem;
-	critical?: IPropertyItem;
-	speed?: IPropertyItem;
-	wsStiff?: IPropertyItem;
-	abilityStiff?: IPropertyItem;
-	autoattack?: IPropertyItem;
 }
 
 export interface IPropertyItem{
 	id: string;
 	name: string;
-	type: 'job' |'boolean' | 'number' | 'time';
+	type: 'boolean' | 'number' | 'time';
 	value: number | boolean;
 }

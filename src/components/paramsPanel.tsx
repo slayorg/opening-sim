@@ -3,19 +3,19 @@ import {h, Component } from 'preact';
 
 import { IJobProperties, IPropertyItem } from '../models';
 
+import parameters from '../data/parameters.json';
+
 interface IRowProps{
-	item: IPropertyItem;
+	param: string;
+	value: {[key: string]: number | boolean};
 	update(id: string, value: number | boolean): void;
 }
 
 class PropertyItem extends Component<IRowProps, {}>{
-
 	update = (e?: Event): void => {
 		let value: number | boolean;
 		let input = e.currentTarget as HTMLInputElement;
-		switch(this.props.item.type){
-			case 'job':
-				break;
+		switch(parameters[this.props.param].type){
 			case 'boolean':
 				value = input.checked;
 				break;
@@ -24,42 +24,78 @@ class PropertyItem extends Component<IRowProps, {}>{
 				value = input.valueAsNumber;
 				break
 		}
-		this.props.update(this.props.item.id, value);
+		this.props.update(this.props.param, value);
 	}
 
 	render(){
 		let valueElem: JSX.Element = null;
-		let type = this.props.item.type;
-		switch(type){
-			case 'job':
-				valueElem = <div className="value">JobPicker</div>;
-				break;
+		let parameter = parameters[this.props.param];
+		switch(parameter.type){
 			case 'time':
 			case 'number':
-				let value = this.props.item.value as number;
+				let value = (this.props.value[this.props.param] as number) || 0;
 				valueElem = (
 					<div className="value">
-						<input type="number" value={type==='number'? value : value.toFixed(2)} onChange={this.update} step={type==='number'? 1 : 0.01}/>
-						{ type === 'time' ? ' sec': null}
+						<input type="number" 
+							value={parameter.type==='number'? value : value.toFixed(2)}
+							onChange={this.update}
+							step={parameter.type==='number'? 1 : 0.01}
+						/>
+						{ parameter.type === 'time' ? ' sec': null}
 					</div>
 				);
 				break
 			case 'boolean':
-			valueElem = <div className="value"><input type="checkbox" checked={this.props.item.value as boolean} onChange={this.update}/></div>;
+				valueElem = (
+					<div className="value">
+						<input type="checkbox"
+							checked={this.props.value[this.props.param] as boolean}
+							onChange={this.update}
+						/>
+					</div>
+				);
 				break;
 		}
 	
 		return (
 			<div>
-				<div className="name">{this.props.item.name}</div>
+				<div className="name">{parameter.name}</div>
 				{valueElem}
 			</div>
 		)
 	}
 }
 
+interface IGroupProps{
+	title: string;
+	params: Array<string>;
+	value: {[key: string]: number | boolean};
+	update(id: string, value: number | boolean): void;
+}
+
+function PropertyGroup(props: IGroupProps){
+	return (
+		<div className="param-group">
+			<div className="title">{props.title}</div>
+			<div className="group">
+				{
+					props.params.map(p => {
+						return (
+							<PropertyItem
+								param={p}
+								value={props.value}
+								update={props.update}
+							/>
+						);
+					})
+				}
+			</div>
+		</div>
+	);
+}
+
 interface IPanelProps{
-	parameters: IJobProperties;
+	value: {[key: string]: number | boolean};
 	update(id: string, value: number | boolean): void;
 }
 
@@ -68,11 +104,24 @@ export default class ParamsPanel extends Component<IPanelProps, {}>{
 		return(
 			<div className="params-panel">
 				<div className="param-properties">
-					{
-						['job', 'aaDelay', 'critical', 'speed', 'wsStiff', 'abilityStiff', 'autoattack'].map(i =>{
-							return <PropertyItem key={i} item={this.props.parameters[i]} update={this.props.update}/>
-						})
-					}
+					<PropertyGroup
+						title="Weapon"
+						params={['damage', 'delay']}
+						value={this.props.value}
+						update={this.props.update}
+					/>
+					<PropertyGroup
+						title="Attributes"
+						params={['str', 'dex', 'vit', 'int', 'mind']}
+						value={this.props.value}
+						update={this.props.update}
+					/>
+					<PropertyGroup
+						title="Offensive"
+						params={['crit', 'direct', 'determination', 'skillspeed', 'spellspeed', 'autoattack']}
+						value={this.props.value}
+						update={this.props.update}
+					/>
 				</div>
 			</div>
 		)
