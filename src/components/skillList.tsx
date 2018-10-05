@@ -1,14 +1,19 @@
 import './skillList.scss';
 import {h, Component } from 'preact';
 
+import { skillMap } from '../services/skillService';
 import { ISkill } from '../models';
 
-function listItem(skill: ISkill, summary: ISummary){
-	summary.total += skill.value;
+
+interface IListProps{
+	skill: ISkill;
+}
+
+function ListItem(props: IListProps){
 	return (
 		<div>
-			<div>Name: {skill.name}</div>
-			<div>Total: {summary.total}</div>
+			<div>Time</div>
+			<div>{props.skill.name}</div>
 		</div>
 	);
 }
@@ -18,7 +23,7 @@ interface ISummary {
 }
 
 interface IProps{
-	skills: Array<ISkill>;
+	items: Array<number>;
 }
 
 export default class SkillList extends Component<IProps, {}> {
@@ -26,8 +31,8 @@ export default class SkillList extends Component<IProps, {}> {
 		let summary: ISummary = {
 			total: 0
 		};
-		let skillItems: Array<JSX.Element> = this.props.skills.map((skill) => {
-			return listItem(skill, summary);
+		let skillItems: Array<JSX.Element> = this.props.items.map((id) => {
+			return <ListItem skill={skillMap[id]} />
 		});
 		return (
 			<div className="skill-list">
