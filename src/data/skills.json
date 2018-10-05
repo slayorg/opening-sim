@@ -1,14 +1,110 @@
 [
 	{
 		"name": "Bootshine",
-		"pot": 140
+		"type": "Weaponskill",
+		"potency": 140,
+
+		"modifiers": [
+			{
+				"condition": [
+					{
+						"type": "status",
+						"value": "opo-opo"
+					},
+					"positional"
+				],
+				"effect": [
+					"crit"
+				]
+			}
+		],
+
+		"after": [
+			{
+				"type": "removestatus",
+				"value": ["opp-opo", "raptor", "coeurl"]
+			},
+			{
+				"type": "addstatus",
+				"value": "raptor",
+				"time": 10
+			}
+		]
 	},
 	{
 		"name": "True Strike",
-		"pot": 180
+		"type": "Weaponskill",
+		"potency": 140,
+
+		"requirements":[
+			{
+				"type": "status",
+				"value": "raptor"
+			}
+		],
+
+		"modifiers": [
+			{
+				"effect": [
+					{
+						"type": "potencybonus",
+						"value": 40
+					}
+				]
+			}
+		],
+		
+		"after":[
+			{
+				"type": "removestatus",
+				"value": ["opp-opo", "raptor", "coeurl"]
+			},
+			{
+				"type": "addstatus",
+				"value": "coeurl",
+				"time": 10	
+			}
+		]
 	},
 	{
 		"name": "Snap Punch",
-		"pot": 170
+		"type": "Weaponskill",
+		"potency": 130,
+
+		"requirements":[
+			{
+				"type": "status",
+				"id": "coeurl"
+			}
+		],
+
+		"modifiers": [
+			{
+				"condition": "positional",
+				"effect": [
+					{
+						"type": "potencybonus",
+						"value": 40
+					}
+				]
+			}
+		],
+
+		"after":[
+			{
+				"type": "removestatus",
+				"id": ["opo-opo", "raptor", "coeurl"]
+			},
+			{
+				"type": "addstatus",
+				"id": "opo-opo",
+				"time": 10	
+			},
+			{
+				"type": "addstatus",
+				"id": "greased",
+				"time": 16
+			}
+		]
 	}
 ]

@@ -1,10 +1,10 @@
 export interface ISkill {
 	name: string;
-	recast?: number;
-	pot?: number;
-
-
-	value: number;
+	type: string;
+	potency: number;
+	requirements: Array<any>;
+	modifiers: Array<any>;
+	after: Array<any>;
 }
 
 export interface IJobProperties{
