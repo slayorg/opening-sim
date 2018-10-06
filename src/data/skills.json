@@ -3,7 +3,14 @@
 		"name": "Bootshine",
 		"type": "Weaponskill",
 		"potency": 140,
-		"gcd": true,
+		"cast": 0,
+		"recast": 25,
+		"group": 58,
+		"aspect": "blunt",
+		"icon": 208,
+		"cost": {
+			"tp": 50
+		},
 
 		"modifiers": [
 			{
@@ -42,7 +49,15 @@
 		"name": "True Strike",
 		"type": "Weaponskill",
 		"potency": 140,
-		"gcd": true,
+		"cast": 0,
+		"recast": 25,
+		"group": 58,
+		"aspect": "blunt",
+		"icon": 209,
+		"cost": {
+			"tp": 50
+		},
+
 
 		"requirements":[
 			{
@@ -80,7 +95,15 @@
 		"name": "Snap Punch",
 		"type": "Weaponskill",
 		"potency": 130,
-		"gcd": true,
+		"cast": 0,
+		"recast": 25,
+		"group": 58,
+		"aspect": "blunt",
+		"icon": 210,
+		"cost": {
+			"tp": 40
+		},
+
 
 		"requirements":[
 			{
@@ -118,10 +141,10 @@
 				}
 			},
 			{
-				"type": "addstatus",
+				"type": "gauge",
 				"value": {
-					"status": "greased",
-					"time": 16
+					"type": "greasedlightning",
+					"value": 1
 				}
 			}
 		]
