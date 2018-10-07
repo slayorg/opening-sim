@@ -12,9 +12,10 @@ const skillArray: Array<ISkill> = [];
 
 export {skillMap, skillArray};
 
-export function processSkill(params: {[key: string]: number|boolean}, state: ICombatState, skill: ISkill): ICombatState {
+export function processSkill(params: {[key: string]: number|boolean}, combatState: ICombatState, skill: ISkill): ICombatState {
 	// Update time, advance time to the next period you can use a skill
 	// TODO handle casting
+	let state: ICombatState = JSON.parse(JSON.stringify(combatState));
 	state.time += Math.max(0.85, state.recast[skill.group]);
 	state.recast[skill.group] = state.time + skill.recast / 10;
 
@@ -50,7 +51,7 @@ export function processSkills(params: {[key: string]: number|boolean}, skills: A
 	let states: Array<ICombatState> = [];
 
 	skills.forEach(skill => {
-		state = processSkill(params, JSON.parse(JSON.stringify(state)), skill);
+		state = processSkill(params, state, skill);
 		states.push(state);
 	});
 
