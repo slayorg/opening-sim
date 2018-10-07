@@ -1,3 +1,7 @@
+export interface IParameterGroup{
+	[key:string]: number | boolean;
+}
+
 export interface ISkillProperty{
 	type: string;
 	value?: {[key: string]: number | string} | string | Array<string> | number | Array<number>;

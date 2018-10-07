@@ -1,13 +1,13 @@
 import './paramsPanel.scss';
 import {h, Component } from 'preact';
 
-import { IJobProperties, IPropertyItem } from '../models';
+import { IJobProperties, IPropertyItem, IParameterGroup } from '../models';
 
 import parameters from '../data/parameters.json';
 
 interface IRowProps{
 	param: string;
-	value: {[key: string]: number | boolean};
+	value: IParameterGroup;
 	update(id: string, value: number | boolean): void;
 }
 
@@ -69,7 +69,7 @@ class PropertyItem extends Component<IRowProps, {}>{
 interface IGroupProps{
 	title: string;
 	params: Array<string>;
-	value: {[key: string]: number | boolean};
+	value: IParameterGroup;
 	update(id: string, value: number | boolean): void;
 }
 
@@ -95,7 +95,7 @@ function PropertyGroup(props: IGroupProps){
 }
 
 interface IPanelProps{
-	value: {[key: string]: number | boolean};
+	value: IParameterGroup;
 	update(id: string, value: number | boolean): void;
 }
 

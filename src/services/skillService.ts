@@ -1,5 +1,5 @@
 import skillData from '../data/skills.json';
-import { ISkill, ICombatState } from '../models';
+import { ISkill, ICombatState, IParameterGroup } from '../models';
 
 const skillMap: {[key: number]: ISkill} = {};
 const skillArray: Array<ISkill> = [];
@@ -12,11 +12,11 @@ const skillArray: Array<ISkill> = [];
 
 export {skillMap, skillArray};
 
-export function processSkill(params: {[key: string]: number|boolean}, combatState: ICombatState, skill: ISkill): ICombatState {
+export function processSkill(params: IParameterGroup, combatState: ICombatState, skill: ISkill): ICombatState {
 	// Update time, advance time to the next period you can use a skill
 	// TODO handle casting
 	let state: ICombatState = JSON.parse(JSON.stringify(combatState));
-	state.time += Math.max(0.85, state.recast[skill.group]);
+	state.time += Math.max(0.85, state.recast[skill.group] || 0);
 	state.recast[skill.group] = state.time + skill.recast / 10;
 
 	state.action = skill.name;
@@ -37,7 +37,7 @@ function getDefaultGauge(job: number): {[key: string]: number} {
 	return {}
 }
 
-export function processSkills(params: {[key: string]: number|boolean}, skills: Array<ISkill>): Array<ICombatState> {
+export function processSkills(params: IParameterGroup, skills: Array<ISkill>): Array<ICombatState> {
 	let state: ICombatState = {
 		statuses: [],
 		damage: 0,
@@ -54,6 +54,8 @@ export function processSkills(params: {[key: string]: number|boolean}, skills: A
 		state = processSkill(params, state, skill);
 		states.push(state);
 	});
+
+	console.log(states);
 
 	return states;
 }

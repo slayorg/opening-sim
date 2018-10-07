@@ -5,12 +5,11 @@ import SkillList from './components/skillList';
 import ParamsPanel from './components/paramsPanel';
 import SkillPanel from './components/skillPanel';
 
-import { ICombatState } from './models';
+import { ICombatState, IParameterGroup } from './models';
 
 interface IAppState {
-	params: {[key: string]: number | boolean};
+	params: IParameterGroup;
 	actions: Array<number>;
-	combatStatus: Array<ICombatState>;
 }
 
 class App extends Component<{}, IAppState> {
@@ -31,8 +30,7 @@ class App extends Component<{}, IAppState> {
 			spellspeed: 364,
 			autoattack: true
 		},
-		actions: [],
-		combatStatus: []
+		actions: []
 	}
 
 	updateParameter = (id: string, value: number | boolean): void => {
@@ -54,7 +52,10 @@ class App extends Component<{}, IAppState> {
 				/>
 				<div className="right-panel">
 					<SkillPanel addSkill={this.addSkill}/>
-					<SkillList items={this.state.actions} />
+					<SkillList 
+						params={this.state.params}
+						items={this.state.actions}
+					/>
 				</div>	
 			</div>
 		)
